@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   FlatList,
-  Button,
   TouchableOpacity,
 } from "react-native";
 import { Context } from "../context/BlogContext";
@@ -15,14 +14,15 @@ const IndexScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Button title="Add Post" onPress={addBlogPost} />
       <FlatList
         data={state}
         keyExtractor={(blogPost) => blogPost.id.toString()} // where blogPost is each elem in blogPosts
         renderItem={({ item }) => {
           // item refers to indivudal blogPost elem object
           return (
-            <TouchableOpacity onPress={() => navigation.navigate("Show", { id: item.id })}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Show", { id: item.id })}
+            >
               <View style={styles.row}>
                 <Text style={styles.title}>
                   {item.title} - {item.id}
@@ -42,6 +42,16 @@ const IndexScreen = ({ navigation }) => {
       />
     </View>
   );
+};
+
+IndexScreen.navigationOptions = ({ navigation }) => {
+  return {
+    headerRight: () => (
+      <TouchableOpacity style={{ marginRight: 10 }} onPress={() => navigation.navigate("Create")}>
+        <EvilIcons name="plus" size={35} />
+      </TouchableOpacity>
+    ),
+  };
 };
 
 const styles = StyleSheet.create({
