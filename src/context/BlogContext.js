@@ -5,8 +5,13 @@ const BlogContext = React.createContext();
 
 // Provider component accepts a value prop to be passed down to 
 export const BlogProvider = ({ children }) => {
+    const blogPosts = [
+        { title: "Blog Post #1" },
+        { title: "Blog Post #2"}
+    ]
+
     return (
-        <BlogContext.Provider value={[12,15]}>
+        <BlogContext.Provider value={blogPosts}>
             {children} 
         </BlogContext.Provider>
     );

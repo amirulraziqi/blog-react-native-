@@ -1,14 +1,20 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import BlogContext from '../context/BlogContext';
 
 const IndexScreen = () => {
-    const value = useContext(BlogContext); // access BlogContext object
+    const blogPosts = useContext(BlogContext); // access BlogContext object
     
     return (
         <View>
             <Text>Index Screen</Text>
-            <Text>{value}</Text>
+            <FlatList
+                data={blogPosts}
+                keyExtractor={blogPost => blogPost.title} // where blogPost is each elem in blogPosts
+                renderItem={({ item }) => { // item refers to indivudal blogPost elem object
+                    return <Text>{item.title}</Text>
+                }}
+            />
         </View>
     );
 };
