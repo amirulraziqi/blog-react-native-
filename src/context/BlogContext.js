@@ -12,6 +12,8 @@ const blogReducer = (state, action) => {
   }
 };
 
+// addBlogPost(dispatch) => {return () => dispatch(...)}
+// function returns a function that calls dispatch functions
 const addBlogPost = (dispatch) => {
   return () => {
     dispatch({ type: "add_blogpost" });
