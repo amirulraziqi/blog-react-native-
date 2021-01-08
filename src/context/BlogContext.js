@@ -1,27 +1,42 @@
 import createDataContext from "./createDataContext";
 
 const blogReducer = (state, action) => {
-  // state === { data: object }
-  // action === { type: 'add_blogpost' || 'edit_blogpost' || 'delete_blogpost' }
+    // state === { data: object }
+    // action === { type: 'add_blogpost' || 'edit_blogpost' || 'delete_blogpost' }
 
-  switch (action.type) {
-    case "add_blogpost":
-      return [...state, { title: `Blog Post #${state.length + 1}` }];
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case "add_blogpost":
+            return [
+                ...state,
+                {
+                    id: Math.floor(Math.random() * 99999),
+                    title: `Blog Post #${state.length + 1}`
+                }
+            ];
+        case "delete_blogpost":
+            // this returns a new array containing all blogPosts whose id !== action.payload, which is id
+            return state.filter((blogPost) => blogPost.id !== action.payload)
+        default:
+            return state;
+    }
 };
 
 // addBlogPost(dispatch) => {return () => dispatch(...)}
 // function returns a function that calls dispatch functions
 const addBlogPost = (dispatch) => {
-  return () => {
-    dispatch({ type: "add_blogpost" });
-  }
+    return () => {
+        dispatch({ type: "add_blogpost" });
+    }
+};
+
+const deleteBlogPost = (dispatch) => {
+    return (id) => {
+        dispatch({ type: 'delete_blogpost', payload: id });
+    }
 };
 
 export const { Context, Provider } = createDataContext(
-  blogReducer,
-  { addBlogPost },
-  []
+    blogReducer,
+    { addBlogPost, deleteBlogPost },
+    []
 );
