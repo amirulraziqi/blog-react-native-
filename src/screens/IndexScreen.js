@@ -10,7 +10,7 @@ import { Context } from "../context/BlogContext";
 import { EvilIcons } from "@expo/vector-icons";
 
 const IndexScreen = ({ navigation }) => {
-  const { state, addBlogPost, deleteBlogPost } = useContext(Context); // access BlogContext object
+  const { state, deleteBlogPost } = useContext(Context); // access BlogContext object
 
   return (
     <View>
