@@ -12,9 +12,10 @@ import { EvilIcons } from "@expo/vector-icons";
 const IndexScreen = ({ navigation }) => {
   const { state, deleteBlogPost, getBlogPosts } = useContext(Context); // access BlogContext object
 
+  // [] means useEffect will only be invoked once upon screen first render
   useEffect(() => {
     getBlogPosts();
-  }, []); // [] means useEffect will only be invoked once upon screen first render
+  }, []); 
 
   return (
     <View>
