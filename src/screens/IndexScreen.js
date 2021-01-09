@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -10,7 +10,11 @@ import { Context } from "../context/BlogContext";
 import { EvilIcons } from "@expo/vector-icons";
 
 const IndexScreen = ({ navigation }) => {
-  const { state, deleteBlogPost } = useContext(Context); // access BlogContext object
+  const { state, deleteBlogPost, getBlogPosts } = useContext(Context); // access BlogContext object
+
+  useEffect(() => {
+    getBlogPosts();
+  }, []); // [] means useEffect will only be invoked once upon screen first render
 
   return (
     <View>
