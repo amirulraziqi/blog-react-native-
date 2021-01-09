@@ -15,6 +15,15 @@ const IndexScreen = ({ navigation }) => {
   // [] means useEffect will only be invoked once upon screen first render
   useEffect(() => {
     getBlogPosts();
+
+    const listener = navigation.addListener('didFocus', () => {
+        getBlogPosts();
+    });
+
+    // will be invoked only if IndexScreen is completely unmounted
+    return () => {
+        listener.remove();
+    }
   }, []); 
 
   return (
