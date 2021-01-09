@@ -20,8 +20,9 @@ const blogReducer = (state, action) => {
   }
 };
 
-const addBlogPost = (dispatch) => {
+const addBlogPost = () => {
   return async (title, content, callback) => {
+    // this adds new blogpost to API store
     await jsonServer.post("/blogposts", { title, content });
     if (callback) {
       callback();
@@ -30,7 +31,10 @@ const addBlogPost = (dispatch) => {
 };
 
 const deleteBlogPost = (dispatch) => {
-  return (id) => {
+  return async (id) => {
+    // this deletes blogpost from API store
+    await jsonServer.delete(`/blogposts/${id}`);
+    // this deletes blogpost from local state
     dispatch({ type: "delete_blogpost", payload: id });
   };
 };
