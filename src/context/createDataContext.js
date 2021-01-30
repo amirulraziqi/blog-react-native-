@@ -1,3 +1,5 @@
+// This file refactors code for creating future Context objects e.g. CommentsContext.js || UsersContext.js
+
 import React, { useReducer } from 'react';
 
 export default (reducer, actions, initialState) => {
@@ -11,7 +13,7 @@ export default (reducer, actions, initialState) => {
         // actions === { addBlogPost: (dispatch) => { return () => {} } }
         const boundActions = {};
         for (let key in actions) {
-            boundActions[key] = actions[key](dispatch); // addBlogPost.dispatch
+            boundActions[key] = actions[key](dispatch); // e.g. addBlogPost.dispatch
         }
 
         return (

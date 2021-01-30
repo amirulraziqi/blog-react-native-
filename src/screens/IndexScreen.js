@@ -21,9 +21,7 @@ const IndexScreen = ({ navigation }) => {
     });
 
     // will be invoked only if IndexScreen is completely unmounted
-    return () => {
-        listener.remove();
-    }
+    return listener;
   }, []); 
 
   return (
